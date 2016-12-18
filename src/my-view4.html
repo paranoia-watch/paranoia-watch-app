@@ -1,0 +1,52 @@
+<!--
+@license
+Copyright (c) 2016 The Polymer Project Authors. All rights reserved.
+This code may only be used under the BSD style license found at http://polymer.github.io/LICENSE.txt
+The complete set of authors may be found at http://polymer.github.io/AUTHORS.txt
+The complete set of contributors may be found at http://polymer.github.io/CONTRIBUTORS.txt
+Code distributed by Google as part of the polymer project is also
+subject to an additional IP rights grant found at http://polymer.github.io/PATENTS.txt
+-->
+
+<link rel="import" href="../bower_components/polymer/polymer.html">
+<link rel="import" href="../bower_components/twitter-user-list/twitter-user-list.html">
+<link rel="import" href="shared-styles.html">
+
+<dom-module id="my-view4">
+  <template>
+    <style include="shared-styles">
+      :host {
+        display: flex;
+        position: relative;
+        width: 100%;
+        height: 100%;
+      }
+
+      twitter-user-list {
+        display: flex;
+        flex: 1;
+      }
+    </style>
+
+    <twitter-user-list
+      title="Top Political Influencers"
+      socket-server-url="[[socketServerUrl]]"
+      listen-to="top-political-influencers"
+      show-day
+      show-week
+      show-month
+      show-all
+      selected-period="day"
+    ></twitter-user-list>
+
+  </template>
+
+  <script>
+    Polymer({
+      is: 'my-view4',
+      properties: {
+        socketServerUrl: String
+      }
+    });
+  </script>
+</dom-module>
