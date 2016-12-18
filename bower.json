@@ -18,7 +18,8 @@
     "polymer": "Polymer/polymer#^1.6.0",
     "twitter-user-list": "paranoia-watch/twitter-user-list",
     "historical-development-graph": "paranoia-watch/historical-development-graph",
-    "location-deviation-viewer": "paranoia-watch/location-deviation-viewer"
+    "location-deviation-viewer": "paranoia-watch/location-deviation-viewer",
+    "peilingwijzer-growth-list": "paranoia-watch/peilingwijzer-growth-list"
   },
   "devDependencies": {
     "web-component-tester": "^4.0.0"
