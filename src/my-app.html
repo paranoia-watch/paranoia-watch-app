@@ -169,7 +169,9 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
       },
 
       _computeTitle: function(page) {
-        var title = this.$$('a[name='+page+']').innerText;
+        var selectedItem = this.$$('app-drawer .iron-selected');
+        if(!selectedItem) return 'Paranoia Watch';
+        var title = selectedItem.innerText;
         return title;
       },
 
