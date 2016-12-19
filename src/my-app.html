@@ -20,17 +20,19 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 <link rel="import" href="../bower_components/iron-pages/iron-pages.html">
 <link rel="import" href="../bower_components/iron-selector/iron-selector.html">
 <link rel="import" href="../bower_components/paper-icon-button/paper-icon-button.html">
+<link rel="import" href="../bower_components/paranoia-watch-styles/paranoia-watch-styles.html">
 <link rel="import" href="my-icons.html">
 
 <dom-module id="my-app">
   <template>
-    <style>
+    <style include="paranoia-watch-styles">
       :host {
-        --color-red: rgba(255, 0, 80, 1);
         --app-secondary-color: black;
-
         display: block;
-      }
+/*        --app-drawer-content-container: {
+          background-color: var(--paranoia-color--darkgray);
+        }
+*/      }
 
       app-header {
         color: #fff;
@@ -42,24 +44,23 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 
       .drawer-list {
         margin: 0 20px;
+        background-color: black;
       }
 
       .drawer-list a {
         display: block;
-
         padding: 0 16px;
-
+        height: 42px;
+        display: flex;
+        align-items: center;
         text-decoration: none;
-
-        color: var(--app-secondary-color);
-
-        line-height: 40px;
+        @apply --paranoia-primary-font--heading6;
+        color: black;
       }
 
       .drawer-list a.iron-selected {
-        color: black;
-
-        font-weight: bold;
+        background-color: var(--paranoia-color--darkgray);
+        color: white;
       }
 
       app-header-layout {
@@ -70,6 +71,18 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
       iron-pages {
         width: 100%;
         height: 100%;
+      }
+
+      :host paper-icon-button {
+        color: var(--paranoia-color--red);
+      }
+
+      app-toolbar {
+        color: var(--paranoia-color--red);
+      }
+
+      h3 {
+        text-align: center;
       }
     </style>
 
@@ -83,7 +96,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
     <app-drawer-layout fullbleed>
       <!-- Drawer content -->
       <app-drawer>
-        <app-toolbar>Menu</app-toolbar>
+        <app-toolbar><h3>Paranoia Watch</h3></app-toolbar>
         <iron-selector selected="[[page]]" attr-for-selected="name" class="drawer-list" role="navigation">
           <a name="view1" href="/view1">Last Hour Deviation</a>
           <a name="view2" href="/view2">Last Hour Growth</a>
@@ -100,7 +113,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
         <app-header condenses reveals effects="waterfall">
           <app-toolbar>
             <paper-icon-button icon="menu" drawer-toggle></paper-icon-button>
-            <div main-title>Paranoia Watch</div>
+            <h3 main-title>[[title]]</h3>
           </app-toolbar>
         </app-header>
 
@@ -133,6 +146,11 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
         socketServerUrl: {
           type: String,
           value: "https://paranoiawatchapi.lotsofpeople.nl"
+        },
+
+        title: {
+          type: String,
+          computed: '_computeTitle(routeData.page)'
         }
       },
 
@@ -148,6 +166,11 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
         // Load page import on demand. Show 404 page if fails
         var resolvedPageUrl = this.resolveUrl('my-' + page + '.html');
         this.importHref(resolvedPageUrl, null, this._showPage404, true);
+      },
+
+      _computeTitle: function(page) {
+        var title = this.$$('a[name='+page+']').innerText;
+        return title;
       },
 
       _showPage404: function() {
