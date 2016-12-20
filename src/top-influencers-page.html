@@ -9,10 +9,10 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 -->
 
 <link rel="import" href="../bower_components/polymer/polymer.html">
-<link rel="import" href="../bower_components/location-deviation-viewer/location-deviation-viewer.html">
+<link rel="import" href="../bower_components/twitter-user-list/twitter-user-list.html">
 <link rel="import" href="shared-styles.html">
 
-<dom-module id="my-view2">
+<dom-module id="top-influencers-page">
   <template>
     <style include="shared-styles">
       :host {
@@ -22,26 +22,29 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
         height: 100%;
       }
 
-      location-deviation-viewer {
-        flex: 1;
+      twitter-user-list {
         display: flex;
-        width: 100%;
+        flex: 1;
       }
     </style>
 
-    <location-deviation-viewer
-      title="Last Hour Growth"
+    <twitter-user-list
+      title="Top Influencers"
       socket-server-url="[[socketServerUrl]]"
-      listen-to="last-hour-growth"
-      first-key="now"
-      second-key="lastHour"
-    ></location-deviation-viewer>
+      listen-to="top-influencers"
+      show-hour
+      show-day
+      show-week
+      show-month
+      show-all
+      selected-period="day"
+    ></twitter-user-list>
 
   </template>
 
   <script>
     Polymer({
-      is: 'my-view2',
+      is: 'top-influencers-page',
       properties: {
         socketServerUrl: String
       }

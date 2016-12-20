@@ -98,12 +98,12 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
       <app-drawer>
         <app-toolbar><h3>Paranoia Watch</h3></app-toolbar>
         <iron-selector selected="[[page]]" attr-for-selected="name" class="drawer-list" role="navigation">
-          <a name="view1" href="/view1">Last Hour Deviation</a>
-          <a name="view2" href="/view2">Last Hour Growth</a>
-          <a name="view3" href="/view3">Top Influencers</a>
-          <a name="view4" href="/view4">Top Political Influencers</a>
-          <a name="view5" href="/view5">Historical Development</a>
-          <a name="view6" href="/view6">Peilingwijzer Growth</a>
+          <a name="last-hour-deviation" href="/last-hour-deviation">Last Hour Deviation</a>
+          <a name="last-hour-growth" href="/last-hour-growth">Last Hour Growth</a>
+          <a name="top-influencers" href="/top-influencers">Top Influencers</a>
+          <a name="top-political-influencers" href="/top-political-influencers">Top Political Influencers</a>
+          <a name="historical-development" href="/historical-development">Historical Development</a>
+          <a name="peilingwijzer-growth" href="/peilingwijzer-growth">Peilingwijzer Growth</a>
        </iron-selector>
       </app-drawer>
 
@@ -120,14 +120,43 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
         <iron-pages
             selected="[[page]]"
             attr-for-selected="name"
-            fallback-selection="view404"
+            fallback-selection="four-oh-four"
             role="main">
-          <my-view1 name="view1" socket-server-url="[[socketServerUrl]]"></my-view1>
-          <my-view2 name="view2" socket-server-url="[[socketServerUrl]]"></my-view2>
-          <my-view3 name="view3" socket-server-url="[[socketServerUrl]]"></my-view3>
-          <my-view4 name="view4" socket-server-url="[[socketServerUrl]]"></my-view4>
-          <my-view5 name="view5" socket-server-url="[[socketServerUrl]]"></my-view5>
-          <my-view6 name="view6" socket-server-url="[[socketServerUrl]]"></my-view6>
+            
+          <last-hour-deviation-page
+            name="last-hour-deviation"
+            socket-server-url="[[socketServerUrl]]"
+          ></last-hour-deviation-page>
+          
+          <last-hour-growth-page
+            name="last-hour-growth"
+            socket-server-url="[[socketServerUrl]]"
+          ></last-hour-growth-page>
+          
+          <top-influencers-page
+            name="top-influencers"
+            socket-server-url="[[socketServerUrl]]"
+          ></top-influencers-page>
+          
+          <top-political-influencers-page
+            name="top-political-influencers"
+            socket-server-url="[[socketServerUrl]]"
+          ></top-political-influencers-page>
+          
+          <historical-development-page
+            name="historical-development"
+            socket-server-url="[[socketServerUrl]]"
+          ></historical-development-page>
+
+          <peilingwijzer-growth-page
+            name="peilingwijzer-growth"
+            socket-server-url="[[socketServerUrl]]"
+          ></peilingwijzer-growth-page>
+                    
+          <four-oh-four-page
+            name="four-oh-four"
+          ></four-oh-four-page>
+                    
         </iron-pages>
       </app-header-layout>
     </app-drawer-layout>
@@ -159,12 +188,13 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
       ],
 
       _routePageChanged: function(page) {
-        this.page = page || 'view1';
+        this.page = page || 'last-hour-deviation';
       },
 
       _pageChanged: function(page) {
+        console.log('page', page)
         // Load page import on demand. Show 404 page if fails
-        var resolvedPageUrl = this.resolveUrl('my-' + page + '.html');
+        var resolvedPageUrl = this.resolveUrl(page + '-page.html');
         this.importHref(resolvedPageUrl, null, this._showPage404, true);
       },
 
@@ -176,7 +206,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
       },
 
       _showPage404: function() {
-        this.page = 'view404';
+        this.page = 'four-oh-four';
       }
     });
   </script>

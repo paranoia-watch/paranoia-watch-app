@@ -12,7 +12,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 <link rel="import" href="../bower_components/location-deviation-viewer/location-deviation-viewer.html">
 <link rel="import" href="shared-styles.html">
 
-<dom-module id="my-view1">
+<dom-module id="last-hour-growth-page">
   <template>
     <style include="shared-styles">
       :host {
@@ -30,18 +30,18 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
     </style>
 
     <location-deviation-viewer
-      title="Last Hour Deviation From Average"
+      title="Last Hour Growth"
       socket-server-url="[[socketServerUrl]]"
-      listen-to="last-hour-deviation"
-      first-key="lastHour"
-      second-key="allTime"
+      listen-to="last-hour-growth"
+      first-key="now"
+      second-key="lastHour"
     ></location-deviation-viewer>
 
   </template>
 
   <script>
     Polymer({
-      is: 'my-view1',
+      is: 'last-hour-growth-page',
       properties: {
         socketServerUrl: String
       }
