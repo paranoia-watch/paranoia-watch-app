@@ -2,13 +2,13 @@
   "entrypoint": "index.html",
   "shell": "src/my-app.html",
   "fragments": [
-    "src/my-view1.html",
-    "src/my-view2.html",
-    "src/my-view3.html",
-    "src/my-view4.html",
-    "src/my-view5.html",
-    "src/my-view6.html",
-    "src/my-view404.html"
+    "src/last-hour-deviation-page.html",
+    "src/last-hour-growth-page.html",
+    "src/top-influencers-page.html",
+    "src/top-political-influencers-page.html",
+    "src/historical-development-page.html",
+    "src/peilingwijzer-growth-page.html",
+    "src/four-oh-four-page.html"
   ],
   "sourceGlobs": [
    "src/**/*",
